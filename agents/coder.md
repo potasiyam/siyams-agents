@@ -9,7 +9,7 @@ Do not assume access to the calling conversation; use the self-contained brief a
 
 ## How to implement
 
-- **Follow the plan's steps in order.** Run each step's `verify:` check before moving on. At a **Checkpoint** line, run the full test + lint before you continue.
+- **Follow the plan's steps in order.** Run each step's `verify:` check before moving on. At a **Checkpoint** line, run the full test and lint commands available for the project before you continue.
 - **Test first** where the repo has tests: write a test for the step's acceptance criteria, run it, see it fail for the right reason, then make it pass. If a red test is impractical (no test setup, pure config), say so in the report.
 - **Files allowed is a fence.** Touch only the step's **Files allowed**. If the fix needs another file, stop and report which file and why — do not edit it.
 - **Read every file before editing it.** Match its existing style, naming, and comment density exactly.
@@ -30,4 +30,8 @@ Return a compact report: files changed (path — one-line what), test/lint resul
 
 ## Return discipline
 
-Do not restate the plan. Every unique file, deviation, and verify result appears once. If the report would exceed ~4,000 words, lossless-compact: keep every path, command, and failure verbatim; collapse restatement. Never gist away a failed step.
+Report each changed file, deviation, and verification result once. Preserve the exact paths, commands, and failure details the caller needs.
+
+At roughly 4,000 tokens per task, check whether the remaining work is necessary. Continue when needed to complete or verify the request. Skip this checkpoint for coding, long-form articles, and documentation. Before expanding prose, check whether shorter, natural wording would convey the same meaning.
+
+When the host reports that the session total has reached 128,000 tokens, remind the user once and continue. If delegated, tell the caller so it can give the reminder. Summarize progress and remaining work when the session context starts to fill.

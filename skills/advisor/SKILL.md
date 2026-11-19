@@ -7,4 +7,4 @@ description: Pressure-test a plan or architecture with an independent reasoning-
 
 Include the decision, proposed approach, constraints, existing evidence, and exact source pointers. Integrate the advice; explicitly flag disagreements and resolve critical unknowns.
 
-Before delegation, read [delegation guidance](../team/references/delegation.md). Use the `advisor` capability class. Read [role instructions](references/role.md) and pass them with the self-contained brief to the worker; do not assume a named agent definition exists. The worker executes that role directly without spawning another copy of itself.
+Read the bundled [role instructions](references/role.md). If the host supports delegation and the task calls for it, give the worker those instructions, the task, sources, permissions, and expected result. The worker performs the role directly. If delegation is unavailable, explain the limit and do the work directly when it fits the role. Disclose any loss of independence.

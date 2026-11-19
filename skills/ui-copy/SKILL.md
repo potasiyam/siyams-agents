@@ -45,7 +45,7 @@ Write clear, scannable product copy. Preserve verbatim copy from Figma, Jira acc
   **Good:** Modal: `Delete API key?` / `Apps using prod-key-04 will lose access immediately.` / `[Cancel]` `[Delete key]`
 
 ## Verify
-Before finishing, check every drafted/changed UI string:
+Before finishing, check the prose in every drafted or changed UI string. Preserve literal characters, product names, and required strings such as a password rule that mentions `!`.
 1. Zero clause dashes (`—`, ` – `, `--`, ` - `), zero `|` separators, zero `!`.
 2. Zero AI filler (`Please`, `Successfully`, `Oops`, `Simply`, `Seamless`, `Are you sure you want to`).
 3. Buttons use `Verb + Object` and casing matches the surrounding screen.

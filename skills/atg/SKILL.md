@@ -20,7 +20,7 @@ Paper limitation (§7): ATG adds overhead for simple tasks. Simple task → say 
 
 ## State file
 
-Keep the graph in `atg-state.md` (project dir if writable and never committed, else a temp dir). The file holds the graph, not the conversation. Update it after every change.
+Create a separate temporary directory for each run. Keep its graph in `atg-state.md` inside that directory. Record the inputs and outputs needed to resume the graph. Update it after every change.
 
 ```
 ## ATG: <task>
@@ -39,7 +39,7 @@ Sections below the graph:
 - `## Node state` — per executed node: input, output, status, error message.
 - `## Thought experiment` — per detected issue: step, error type, diagnostic.
 
-Status tags: `[pending]` `[running]` `[done]` `[failed]` `[frozen]` `[repaired]`.
+Status tags: `[pending]` `[running]` `[done]` `[failed]` `[unresolved]` `[frozen]` `[repaired]`.
 
 ## 1 — Interface-preserving recursive graph compilation (§4.1)
 
@@ -75,7 +75,7 @@ For each issue, record the step where it appears, the error type, and the diagno
 
 ## 4 — Minimal necessary subgraph repair (§4.3)
 
-Applies to failures from the thought experiment and from real execution. The same agent repairs, without human intervention.
+Repair failures within the task’s authorization. After a timeout or ambiguous result from a write, inspect the resulting state before retrying. Mark the node done if the write succeeded. If you cannot establish the outcome, record the node as unresolved and pause dependent work.
 
 1. **Localize**: find the failed atomic node v_f, or the set F of failed nodes.
 2. **Trace**: follow ANCESTRY and `## Refinement history` back to the lowest common historical ancestor a_f — the smallest ancestor the failed region was derived from. a_f marks the planning scope where the error was introduced.

@@ -17,9 +17,9 @@ Shell access is for **read-only inspection only**: `git diff`, `git log`, `git s
   2. A test got easier (`.skip`/`.only` added, test file deleted, assertions removed from a kept test).
   3. A checker got silenced (new `@ts-ignore`, `eslint-disable`, `phpcs:ignore`, `istanbul ignore`, `nosemgrep`).
   4. Work is unfinished (stub that throws, empty `catch`, `TODO` in place of the implementation).
-  5. A scope fence was crossed (file changed that is not in the step's **Files allowed**).
+  5. A change exceeds the plan’s allowed files or the user’s stated scope.
 
-- **Plan fidelity first.** Every planned step should show up in the diff (or be explained as skipped). Extra files/hunks that are not in the plan are findings, not "improvements."
+- **Check scope first.** Account for each planned step and flag unexplained changes outside the plan. When reviewing against stated intent, flag changes outside that intent.
 - **Bugs over nits.** Prefer incorrect behavior, missing edge cases, broken callers, and test gaps. Do not nitpick style that already matches the file.
 - **Conventions**: flag only real mismatches with the repo's existing patterns.
 - **Do not re-plan or re-implement.** No alternative architecture unless the diff is wrong against the approved plan.
@@ -35,4 +35,8 @@ If there are no findings after a thorough check, say so in one line after the ve
 
 ## Return discipline
 
-Do not restate the plan or paste the whole diff. Every unique finding appears once. If the return would exceed ~4,000 words, lossless-compact: keep every finding verbatim; collapse restatement. Never gist away a blocker.
+Include each distinct finding and the evidence needed to act on it. Refer to the diff by file and line.
+
+At roughly 4,000 tokens per task, check whether the remaining work is necessary. Continue when needed to complete or verify the request. Skip this checkpoint for coding, long-form articles, and documentation. Before expanding prose, check whether shorter, natural wording would convey the same meaning.
+
+When the host reports that the session total has reached 128,000 tokens, remind the user once and continue. If delegated, tell the caller so it can give the reminder. Summarize progress and remaining work when the session context starts to fill.

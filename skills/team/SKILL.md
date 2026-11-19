@@ -7,6 +7,8 @@ description: Coordinate scout, advisor, planner, coder, and reviewer roles using
 
 The main agent owns integration, user communication, git, external writes, and any requested project notes. Read [delegation guidance](references/delegation.md) before dispatch; the sibling [scout](../scout/SKILL.md), [advisor](../advisor/SKILL.md), [planner](../planner/SKILL.md), [coder](../coder/SKILL.md), and [reviewer](../reviewer/SKILL.md) skills supply their worker instructions. These portable skills require no named agent definitions or particular model provider.
 
+Before dispatch, check that the required role instructions are available. Name any missing roles and use the delegation guidance to decide whether a direct pass can satisfy the request.
+
 ## Model capability preferences
 
 | Role | Preferred capability | Writes source files? |

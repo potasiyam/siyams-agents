@@ -13,9 +13,9 @@ for root in parser.parse_args().roots:
         digest = hashlib.sha256(path.read_bytes()).hexdigest()
         entries.setdefault(path.parent.name, {})[path.resolve()] = digest
 for name, copies in sorted(entries.items()):
-    state = "single" if len(copies) == 1 else "identical"
+    state = "single entrypoint" if len(copies) == 1 else "identical entrypoints"
     if len(set(copies.values())) > 1:
-        state = "different"
+        state = "different entrypoints"
     print(f"{name}: {state}")
     for path, digest in copies.items():
         print(f"  {digest}  {path}")

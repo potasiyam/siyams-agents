@@ -7,4 +7,4 @@ description: Inspect implementation work read-only and produce a concrete plan w
 
 Include the task and acceptance criteria, repo path, ticket extract, local conventions, and known gitflow. Present the returned plan for user approval before implementation, unless that approval was already supplied. Resolve missing facts before requesting approval.
 
-Before delegation, read [delegation guidance](../team/references/delegation.md). Use the `planner` capability class. Read [role instructions](references/role.md) and pass them with the self-contained brief to the worker; do not assume a named agent definition exists. The worker executes that role directly without spawning another copy of itself.
+Read the bundled [role instructions](references/role.md). If the host supports delegation and the task calls for it, give the worker those instructions, the task, sources, permissions, and expected result. The worker performs the role directly. If delegation is unavailable, explain the limit and do the work directly when it fits the role. Disclose any loss of independence.

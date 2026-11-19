@@ -21,9 +21,9 @@ const outDir = join(dirname(htmlPath), filesDir);
 mkdirSync(outDir, { recursive: true });
 
 const bundle = JSON.parse(readFileSync(bundlePath, 'utf8'));
-let html = readFileSync(htmlPath, 'utf8');
+const html = readFileSync(htmlPath, 'utf8');
 const used = new Set();
-let refs = 0;
+const localPaths = new Map();
 for (const [url, { b64 }] of Object.entries(bundle)) {
   let name = basename(new URL(url).pathname) || 'image';
   for (let n = 2; used.has(name); n++) name = name.replace(/(\.[^.]*)?$/, `-${n}$1`);
@@ -31,10 +31,19 @@ for (const [url, { b64 }] of Object.entries(bundle)) {
   const target = join(outDir, name);
   if (existsSync(target)) throw new Error(`refusing to overwrite ${target}`);
   writeFileSync(target, Buffer.from(b64, 'base64'));
-  const parts = html.split(url);
-  refs += parts.length - 1;
-  html = parts.join(`${filesDir}/${name}`);
+  localPaths.set(url, `${filesDir}/${name}`);
+}
+let refs = 0;
+let localHtml = html;
+if (localPaths.size) {
+  const urls = [...localPaths.keys()].sort((a, b) => b.length - a.length)
+    .map(url => url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const reference = new RegExp(`(^|[\\s"'(>,]|&quot;|&#39;)(${urls.join('|')})(?=$|[\\s"'<)]|&quot;|&#39;|,\\s)`, 'g');
+  localHtml = html.replace(reference, (_, prefix, url) => {
+    refs++;
+    return prefix + localPaths.get(url);
+  });
 }
 const outHtml = `${stem}.local.html`;
-writeFileSync(outHtml, html, { flag: 'wx' });
+writeFileSync(outHtml, localHtml, { flag: 'wx' });
 console.log(`files: ${used.size} -> ${outDir}\nrefs replaced: ${refs}\nwrote ${outHtml}`);

@@ -29,4 +29,8 @@ Use code only to illustrate a specific point — you are advising, not implement
 
 ## Return discipline
 
-Do not restate the brief. Every unique recommendation, risk, or check appears once. If the return would exceed ~4,000 words, lossless-compact: keep every unique item verbatim; collapse restatement. Never gist away a decision.
+Lead with the recommendation. Include each decision, risk, and verification check once.
+
+At roughly 4,000 tokens per task, check whether the remaining work is necessary. Continue when needed to complete or verify the request. Skip this checkpoint for coding, long-form articles, and documentation. Before expanding prose, check whether shorter, natural wording would convey the same meaning.
+
+When the host reports that the session total has reached 128,000 tokens, remind the user once and continue. If delegated, tell the caller so it can give the reminder. Summarize progress and remaining work when the session context starts to fill.
